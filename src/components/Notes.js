@@ -16,7 +16,7 @@ const Notes = (props) => {
             navigate('/login');
         }
         // eslint-disable-next-line
-    }, [])  
+    }, [])
     const ref = useRef(null)
     const refClose = useRef(null)
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
@@ -74,8 +74,8 @@ const Notes = (props) => {
                 </div>
             </div>
 
-            <div className="row my-3">
-                <h2>You Notes</h2>
+            <div style={{ color: "white" }} className="row my-3">
+                <h2>Your Notes</h2>
                 <div className="container mx-2">
                     {notes.length === 0 && 'No notes to display'}
                 </div>
