@@ -11,11 +11,11 @@ const Noteitem = (props) => {
                 <div className="card-body">
                     <div className="d-flex align-items-center">
                         <h5 className="card-title">{note.title}</h5>
-                        <i className="far fa-trash-alt mx-2" onClick={() => {
+                        <i className="far fa-trash-alt mx-2" style={{ cursor: 'pointer' }} onClick={() => {
                             deleteNote(note._id);
                             props.showAlert("Delted successfully", "success")
                         }}></i>
-                        <i className="far fa-edit mx-2" onClick={() => {
+                        <i className="far fa-edit mx-2" style={{ cursor: 'pointer' }} onClick={() => {
                             updateNote(note);
                             // props.showAlert("Updated successfully", "success")
                         }}></i>

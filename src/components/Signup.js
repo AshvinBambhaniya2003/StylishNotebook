@@ -38,19 +38,19 @@ const Signup = (props) => {
             <form className='my-3' onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
-                    <input style={{ background: "#e1d8d8" }} type="text" className="form-control" onChange={onChange} id="name" name="name" aria-describedby="emailHelp" />
+                    <input style={{ background: "rgb(232, 240, 254)" }} type="text" className="form-control" onChange={onChange} id="name" name="name" aria-describedby="emailHelp" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
-                    <input style={{ background: "#e1d8d8" }} type="email" className="form-control" onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
+                    <input style={{ background: "rgb(232, 240, 254)" }} type="email" className="form-control" onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input style={{ background: "#e1d8d8" }} type="password" className="form-control" onChange={onChange} minLength={5} required name="password" id="password" />
+                    <input style={{ background: "rgb(232, 240, 254)" }} type="password" className="form-control" onChange={onChange} minLength={5} required name="password" id="password" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                    <input style={{ background: "#e1d8d8" }} type="password" className="form-control" onChange={onChange} minLength={5} required name="cpassword" id="cpassword" />
+                    <input style={{ background: "rgb(232, 240, 254)" }} type="password" className="form-control" onChange={onChange} minLength={5} required name="cpassword" id="cpassword" />
                 </div>
 
                 <button type="submit" className="btn btn-primary">Submit</button>
