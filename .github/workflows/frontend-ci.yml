@@ -9,9 +9,6 @@ on:
       - "package-lock.json"
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   build-and-push:

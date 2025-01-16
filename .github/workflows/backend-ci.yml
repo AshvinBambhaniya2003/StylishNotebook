@@ -6,9 +6,6 @@ on:
       - "Backend/**"
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   build-and-push:
