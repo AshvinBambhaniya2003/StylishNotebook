@@ -2,7 +2,7 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-    const host = "http://localhost:5000"
+    const BACKEND_URI = process.env.REACT_APP_BACKEND_URI || "http://localhost:5000";
     const notesInitial = []
     const [notes, setNotes] = useState(notesInitial);
 
@@ -10,7 +10,10 @@ const NoteState = (props) => {
     // Get all Notes
     const getNotes = async () => {
         // API Call 
-        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        console.log("BACKEND_URI",BACKEND_URI);
+        const BACKEND_UR1I = process.env.REACT_APP_BACKEND_URI;
+        console.log("BACKEND_UR1I",BACKEND_UR1I);
+        const response = await fetch(`${BACKEND_URI}/api/notes/fetchallnotes`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +28,7 @@ const NoteState = (props) => {
     const addNote = async (title, description, tag) => {
         // TODO: API Call
 
-        const response = await fetch(`${host}/api/notes/addnote`, {
+        const response = await fetch(`${BACKEND_URI}/api/notes/addnote`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +43,7 @@ const NoteState = (props) => {
     // Delete a Note
     const deleteNote = async (id) => {
         // TODO: API Call
-        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        const response = await fetch(`${BACKEND_URI}/api/notes/deletenote/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +60,7 @@ const NoteState = (props) => {
     // Edit a Note
     const editNote = async (id, title, description, tag) => {
         // API Call 
-        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+        const response = await fetch(`${BACKEND_URI}/api/notes/updatenote/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

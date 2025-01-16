@@ -33,7 +33,8 @@ const AddNote = (props) => {
 
     const getUser = async () => {
         // API Call 
-        const response = await fetch('http://localhost:5000/api/auth/getuser', {
+        const BACKEND_URI = process.env.REACT_APP_BACKEND_URI || "http://localhost:5000";
+        const response = await fetch(`${BACKEND_URI}/api/auth/getuser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

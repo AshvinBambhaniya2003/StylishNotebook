@@ -8,7 +8,8 @@ const Signup = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { name, email, password } = credentials;
-        const response = await fetch("http://localhost:5000/api/auth/createuser", {
+        const BACKEND_URI = process.env.REACT_APP_BACKEND_URI || "http://localhost:5000";
+        const response = await fetch(`${BACKEND_URI}/api/auth/createuser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
