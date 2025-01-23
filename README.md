@@ -1,70 +1,162 @@
-# Getting Started with Create React App
+# StylishNotebook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+StylishNotebook is a full-stack web application that allows users to securely store their notes in the cloud. It features a user authentication system, note creation, editing, deletion, and secure storage using JWT and bcrypt for password hashing.
 
-## Available Scripts
+## Features:
+- **User Authentication**: Create and log in with your account using email and password.
+- **Note Management**: Add, edit, delete, and view notes.
+- **Secure**: Passwords are hashed with bcrypt, and JWT is used for secure authentication.
+- **Responsive**: Works in modern browsers such as Chrome, Firefox, and Safari.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Table of Contents
+1. [Local Setup](#local-setup)
+2. [Kubernetes Setup](#kubernetes-setup)
+3. [Application Overview](#application-overview)
+4. [Project Structure](#project-structure)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Local Setup
 
-### `npm test`
+To set up and run the application locally, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Ensure that the following software is installed:
+- **Docker**: [Install Docker](https://www.docker.com/get-started)
+- **Docker Compose**: [Install Docker Compose](https://docs.docker.com/compose/install/)
+- **Node.js** (for development purposes): [Install Node.js](https://nodejs.org/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Steps
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   git clone https://github.com/yourusername/stylishnotebook.git
+   cd stylishnotebook
+   ```
 
-### `npm run eject`
+2. Copy the `.env.example` to `.env`:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   cp .env.example .env
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   Adjust the values in `.env` if necessary (e.g., `REACT_APP_BACKEND_URI` for the frontend).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Build and start the application using Docker Compose:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   docker-compose up --build
+   ```
 
-## Learn More
+   This will start the following services:
+   - **Frontend** (React app) on port 3000.
+   - **Backend** (Node.js app) on port 5000.
+   - **MongoDB** on port 27017 for note storage.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Open the app in your browser:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   Visit `http://localhost:3000` to access the app.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Kubernetes Setup
 
-### Analyzing the Bundle Size
+If you'd like to run the application on Kubernetes, follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Prerequisites
 
-### Making a Progressive Web App
+Ensure that you have the following set up:
+- **kubectl**: [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- **Helm** (optional for deployment): [Install Helm](https://helm.sh/docs/intro/install/)
+- **Docker**: Installed and configured for building images.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Steps
 
-### Advanced Configuration
+1. **Build Docker Images**:
+   
+   Build both the frontend and backend Docker images.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```bash
+   docker build -t yourusername/notebook-frontend ./frontend
+   docker build -t yourusername/notebook-backend ./backend
+   ```
 
-### Deployment
+2. **Push Docker Images to a Registry** (e.g., Docker Hub):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   ```bash
+   docker push yourusername/notebook-frontend
+   docker push yourusername/notebook-backend
+   ```
 
-### `npm run build` fails to minify
+3. **Create Kubernetes Deployment Files**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   You will need to create deployment and service YAML files for both frontend and backend services. You can create them manually or use Helm charts.
+
+4. **Deploy to Kubernetes**:
+
+   If using kubectl directly:
+   
+   ```bash
+   kubectl apply -f frontend-deployment.yaml
+   kubectl apply -f backend-deployment.yaml
+   kubectl apply -f mongo-deployment.yaml
+   ```
+
+   Ensure that the services are exposed properly.
+
+5. **Access the Application**:
+
+   After deployment, you should be able to access the application via the frontend service's external IP.
+
+---
+
+## Application Overview
+
+This application is built with a **React frontend** and a **Node.js backend**. The backend is connected to **MongoDB** for storing user data and notes. The main features include:
+
+- **Authentication**: Users can create accounts, log in, and access their own notes.
+- **Note Management**: CRUD operations for notes (Create, Read, Update, Delete).
+- **Secure**: JWT tokens for authentication, bcrypt for password hashing.
+- **Responsive Design**: Mobile and desktop friendly UI.
+
+---
+
+## Project Structure
+
+```plaintext
+└─ ashvinbambhaniya2003-stylishnotebook/
+    ├─ README.md
+    ├─ Dockerfile
+    ├─ docker-compose.yml
+    ├─ package.json
+    ├─ .dockerignore
+    ├─ .env.example
+    ├─ Backend/
+    │   ├─ Dockerfile
+    │   ├─ db.js
+    │   ├─ index.js
+    │   ├─ package-lock.json
+    │   ├─ package.json
+    │   └─ routes/
+    ├─ public/
+    ├─ src/
+    │   ├─ App.js
+    │   ├─ components/
+    │   ├─ context/
+    ├─ .github/
+        └─ workflows/
+            ├─ backend-ci.yml
+            └─ frontend-ci.yml
+```
+
+- **Frontend**: React application in the `src` folder.
+- **Backend**: Node.js backend with MongoDB connection in the `Backend` folder.
+- **Docker**: Dockerfiles and `docker-compose.yml` to run both the frontend and backend locally.
+- **CI/CD**: GitHub Actions workflows for automatic build and deployment.
+
+---
+
