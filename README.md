@@ -12,9 +12,8 @@ StylishNotebook is a full-stack web application that allows users to securely st
 
 ## Table of Contents
 1. [Local Setup](#local-setup)
-2. [Kubernetes Setup](#kubernetes-setup)
-3. [Application Overview](#application-overview)
-4. [Project Structure](#project-structure)
+2. [Application Overview](#application-overview)
+3. [Project Structure](#project-structure)
 
 ---
 
@@ -60,57 +59,6 @@ Ensure that the following software is installed:
 4. Open the app in your browser:
 
    Visit `http://localhost:3000` to access the app.
-
----
-
-## Kubernetes Setup
-
-If you'd like to run the application on Kubernetes, follow these steps:
-
-### Prerequisites
-
-Ensure that you have the following set up:
-- **kubectl**: [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- **Helm** (optional for deployment): [Install Helm](https://helm.sh/docs/intro/install/)
-- **Docker**: Installed and configured for building images.
-
-### Steps
-
-1. **Build Docker Images**:
-   
-   Build both the frontend and backend Docker images.
-
-   ```bash
-   docker build -t yourusername/notebook-frontend ./frontend
-   docker build -t yourusername/notebook-backend ./backend
-   ```
-
-2. **Push Docker Images to a Registry** (e.g., Docker Hub):
-
-   ```bash
-   docker push yourusername/notebook-frontend
-   docker push yourusername/notebook-backend
-   ```
-
-3. **Create Kubernetes Deployment Files**:
-
-   You will need to create deployment and service YAML files for both frontend and backend services. You can create them manually or use Helm charts.
-
-4. **Deploy to Kubernetes**:
-
-   If using kubectl directly:
-   
-   ```bash
-   kubectl apply -f frontend-deployment.yaml
-   kubectl apply -f backend-deployment.yaml
-   kubectl apply -f mongo-deployment.yaml
-   ```
-
-   Ensure that the services are exposed properly.
-
-5. **Access the Application**:
-
-   After deployment, you should be able to access the application via the frontend service's external IP.
 
 ---
 
